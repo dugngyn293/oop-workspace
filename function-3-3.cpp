@@ -6,21 +6,13 @@ double weighted_average(int array[], int n) {
         return 0.0; // Return 0 if the array size is less than 1
     }
 
-    std::unordered_map<int, int> frequencies; // To store the frequency of each element
-    double sum = 0.0;
+    double weighted_sum = 0.0;
 
-    // Count the frequency of each element in the array
+    // Calculate the weighted sum by dividing each element's weighted contribution by n
     for (int i = 0; i < n; ++i) {
-        frequencies[array[i]]++;
-    }
-
-    // Calculate the weighted sum
-    for (const auto& entry : frequencies) {
-        int value = entry.first;
-        int count = entry.second;
-        sum += value * static_cast<double>(count);
+        weighted_sum += static_cast<double>(array[i]) / n;
     }
 
     // Return the weighted average
-    return sum / static_cast<double>(n);
+    return weighted_sum;
 }
