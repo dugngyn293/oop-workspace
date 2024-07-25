@@ -19,5 +19,5 @@ double weighted_average(int array[], int n) {
         }
     }
 
-    return sum / n;
+    return sum /static_cast<double>(n);
 }
