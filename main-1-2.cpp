@@ -11,7 +11,7 @@ int main() {
     int size2 = 3;
     
     int arr3[] = {-1, 0, 1};
-    int size3 = 0; 
+    int size3 = 3; 
 
     std::cout << "Average of arr1: " << array_mean(arr1, size1) << std::endl;
     std::cout << "Average of arr2: " << array_mean(arr2, size2) << std::endl;
