@@ -9,11 +9,11 @@ double weighted_average(int array[], int n) {
     double sum = 0.0;
     int frequencies[101] = {0}; 
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         frequencies[array[i]]++;
     }
 
-    for (int i = 0; i < 101; ++i) {
+    for (int i = 0; i < 101; i++) {
         if (frequencies[i] > 0) {
             sum += i * frequencies[i];
         }
