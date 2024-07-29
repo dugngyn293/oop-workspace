@@ -2,69 +2,69 @@
 #include <cmath>
 using namespace std;
 
-int pow10(int n){
-  int ans=1;
-  for(int i=0;i<n;i++){
+int powerOf10(int n){
+  int ans = 1;
+  for(int i = 0; i < n; i++){
     ans *= 10;
   }
   return ans;
 }
 
-int getoneorzero(int n, int pos){
-  return int((n%(pow10(pos+1)))/(pow10(pos)));
+int getDigitAtPosition(int n, int pos){
+  return int((n % (powerOf10(pos + 1))) / (powerOf10(pos)));
 }
 
-int badd(int numb1, int numb2){
+int binaryAddition(int num1, int num2){
   int ans = 0;
-  int nod = max(floor(log10(numb1))+1, floor(log10(numb2))+1);
-  int r = 0;
-  for(int i=0;i<nod;i++){
-    ans += ((getoneorzero(numb1,i) + getoneorzero(numb2,i) + r)%2)*pow10(i);
-    r = floor((getoneorzero(numb1,i) + getoneorzero(numb2,i) + r)/2);
+  int numDigits = max(floor(log10(num1)) + 1, floor(log10(num2)) + 1);
+  int carry = 0;
+  for(int i = 0; i < numDigits; i++){
+    ans += ((getDigitAtPosition(num1, i) + getDigitAtPosition(num2, i) + carry) % 2) * powerOf10(i);
+    carry = floor((getDigitAtPosition(num1, i) + getDigitAtPosition(num2, i) + carry) / 2);
   }
-  if(r==1){
-    ans += r*pow10(nod+1);
+  if(carry == 1){
+    ans += carry * powerOf10(numDigits);
   }
   return ans;
 }
 
-int bsubtract(int numb1, int numb2){
+int binarySubtraction(int num1, int num2){
   int ans = 0;
-  int r = 0;
-  int nod = max(floor(log10(numb1))+1, floor(log10(numb2))+1);
-  for(int i=0;i<nod;i++){
-    if(getoneorzero(numb1,nod-1-i) < getoneorzero(numb2,nod-1-i)){
+  int borrow = 0;
+  int numDigits = max(floor(log10(num1)) + 1, floor(log10(num2)) + 1);
+  for(int i = 0; i < numDigits; i++){
+    if(getDigitAtPosition(num1, numDigits - 1 - i) < getDigitAtPosition(num2, numDigits - 1 - i)){
       return -1;
     }
-    if (getoneorzero(numb1,nod-1-i) > getoneorzero(numb2,nod-1-i)){
+    if(getDigitAtPosition(num1, numDigits - 1 - i) > getDigitAtPosition(num2, numDigits - 1 - i)){
       break;
     }
   }
-  for(int i=0;i<nod;i++){
-    int p = abs(((getoneorzero(numb1,i) - getoneorzero(numb2,i) - r)%2));
-    ans += p*pow10(i);
-    if(getoneorzero(numb1,i) - getoneorzero(numb2,i) - r == -1 or getoneorzero(numb1,i) - getoneorzero(numb2,i) - r == -2){
-      r = 1;
+  for(int i = 0; i < numDigits; i++){
+    int p = abs(((getDigitAtPosition(num1, i) - getDigitAtPosition(num2, i) - borrow) % 2));
+    ans += p * powerOf10(i);
+    if(getDigitAtPosition(num1, i) - getDigitAtPosition(num2, i) - borrow == -1 || getDigitAtPosition(num1, i) - getDigitAtPosition(num2, i) - borrow == -2){
+      borrow = 1;
     }
     else{
-      r = 0;
+      borrow = 0;
     }
   }
   return ans;
 }
 
-int bshiftleft(int n){
-  return n*10;
+int binaryShiftLeft(int n){
+  return n * 10;
 }
 
-int bshiftright(int n){
-  return floor(n/10);
+int binaryShiftRight(int n){
+  return floor(n / 10);
 }
 
 int main(){
-  cout << badd(111011,111) << endl;
-  cout << bsubtract(111011,111) << endl;
-  cout << bshiftleft(111011) << endl;
-  cout << bshiftright(111011) << endl;
+  cout << binaryAddition(111011, 111) << endl;
+  cout << binarySubtraction(111011, 111) << endl;
+  cout << binaryShiftLeft(111011) << endl;
+  cout << binaryShiftRight(111011) << endl;
   return 0;
 }
