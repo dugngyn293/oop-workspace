@@ -1,10 +1,9 @@
+// function-1-2.cpp
+
 #include <iostream>
 
-using namespace std;
-
 void modifyArray(double* array, int size, double value) {
-    for(int i = 0 ; i< size; i++) {
-            array[i] += value;
-            cout << array[i] << " ";
-        }
+    for (int i = 0; i < size; ++i) {
+        array[i] += value;
     }
+}
