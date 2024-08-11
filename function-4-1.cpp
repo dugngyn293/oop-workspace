@@ -21,9 +21,9 @@ int secondSmallestSum(int *numbers,int length) {
     for(int i=0; i<length; i++) {
         for (int j ; j<length; j++) {
             sum+=numbers[j];
-            cout << sum << "," << endl;
+            cout << sum << ",";
         }
         j++;
-
+        sum = 0;
     }
 }
