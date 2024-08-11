@@ -15,22 +15,21 @@ void printNumbers(int *numbers,int length) {
     }
 };
 
-int secondSmallestSum(int *numbers,int length) {
-    int sum =0;
-    int j=0;
-    int result = length*(length+1)/2;
-    int array[result]
-    int k =0;
-    for(int i=0; i<length; i++) {
-        for (int j ; j<length; j++) {
-            sum+=numbers[j];
+int secondSmallestSum(int* numbers, int length) {
+    int result = length * (length + 1) / 2;
+    int array[result];
+    int k = 0;
+
+    for (int i = 0; i < length; i++) {
+        int sum = 0;
+        for (int j = i; j < length; j++) {
+            sum += numbers[j];
             array[k] = sum;
             k++;
         }
-        j++;
-        sum = 0;
     }
-    sort(array.begin(), array.end());
+    std::sort(array, array + result);
+
+    // Return the second smallest element
     return array[1];
-    
 }
