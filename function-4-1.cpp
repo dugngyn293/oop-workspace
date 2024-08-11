@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -30,5 +30,7 @@ int secondSmallestSum(int *numbers,int length) {
         j++;
         sum = 0;
     }
+    sort(array.begin(), array.end());
+    return array[1];
     
 }
