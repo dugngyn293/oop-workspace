@@ -1,5 +1,8 @@
 #include "Musician.h"
 
+#include <iostream>
+#include <string>
+
 Musician::Musician() {
   _instrument = "null";
   _experience = 0;
