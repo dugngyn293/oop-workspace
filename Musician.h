@@ -1,10 +1,14 @@
 #ifndef MUSICIAN_H
 #define MUSICIAN_H
+
+#include <iostream>
 #include <string>
+using namespace std;
+
 class Musician {
  private:
-  std::string _instrument;
-  int _experience;
+  string instrument;
+  int experience;
 
  public:
   Musician();
@@ -12,4 +16,5 @@ class Musician {
   std::string get_instrument();
   int get_experience();
 };
+
 #endif
