@@ -1,32 +1,26 @@
 #include <iostream>
 #include <string>
 using namespace std;
+#include "AirCraft.h"
+#include "AirFleet.h"
 #include "Airplane.h"
+#include "Helicopter.h"
 
-Airplane::Airplane() {};
-Airplane::Airplane(int w, int p) {
-  numberOfFlights = 0;
-  fuel = 100;
-  weight = w;
-  numPassengers = p;
-};  // Create Airplane with weight w and passengers p
-void Airplane::reducePassengers(int x) {
-  numPassengers = numPassengers - x;
-  if (numPassengers < 0) {
-    numPassengers = 0;
-  }
-};  // reduce passenger list by x
-int Airplane::get_numPassengers() { return numPassengers; };
-void Airplane::fly(int headwind, int minutes) {
-  int ogFuel = fuel;
-  if (headwind >= 60) {
-    fuel = fuel - (0.5 * minutes) - (0.001 * numPassengers * minutes);
-  } else if (headwind < 60) {
-    fuel = fuel - (0.3 * minutes) - (0.001 * numPassengers * minutes);
-  }
-  if (fuel < 20) {
-    fuel = ogFuel;
-  } else if (fuel >= 20) {
-    numberOfFlights++;
-  }
+AirFleet::AirFleet() {
+  fleet = new AirCraft*[5];
+  fleet[0] = new Airplane(20, 10);
+  fleet[1] = new Helicopter(10000, "BlackHawk");
+  fleet[2] = new AirCraft(5000);
+  fleet[3] = new Helicopter(100, "WhiteHawk");
+  fleet[4] = new Airplane(15, 20);
 };
+/* creates an air fleet containing pointers to 5 AirCraft objects as an
+ * array;
+ */
+
+AirCraft** AirFleet::get_fleet() {
+  return fleet;
+};  // returns the array of pointers to the five
+    // aircraft objects
+
+AirFleet::~AirFleet() { delete[] fleet; };
