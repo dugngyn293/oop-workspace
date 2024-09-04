@@ -9,13 +9,13 @@ Airplane::Airplane(int w, int p) {
   fuel = 100;
   weight = w;
   numPassengers = p;
-};  // Create Airplane with weight w and passengers p
+};
 void Airplane::reducePassengers(int x) {
   numPassengers = numPassengers - x;
   if (numPassengers < 0) {
     numPassengers = 0;
   }
-};  // reduce passenger list by x
+};
 int Airplane::get_numPassengers() { return numPassengers; };
 void Airplane::fly(int headwind, int minutes) {
   int ogFuel = fuel;
