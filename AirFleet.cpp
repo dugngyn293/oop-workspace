@@ -14,13 +14,6 @@ AirFleet::AirFleet() {
   fleet[3] = new Helicopter(100, "WhiteHawk");
   fleet[4] = new Airplane(15, 20);
 };
-/* creates an air fleet containing pointers to 5 AirCraft objects as an
- * array;
- */
 
-AirCraft** AirFleet::get_fleet() {
-  return fleet;
-};  // returns the array of pointers to the five
-    // aircraft objects
-
+AirCraft** AirFleet::get_fleet() { return fleet; };
 AirFleet::~AirFleet() { delete[] fleet; };
