@@ -13,12 +13,8 @@ class AirFleet {
 
  public:
   AirFleet();
-  /* creates an air fleet containing pointers to 5 AirCraft objects as an
-   * array;
-   */
 
-  AirCraft **get_fleet();  // returns the array of pointers to the five
-                           // aircraft objects
+  AirCraft **get_fleet();
   ~AirFleet();
 };
 
