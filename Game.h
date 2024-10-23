@@ -38,6 +38,9 @@ class Game {
         }
         for (int i = 0; i < numTraps; i++) {
             tuple<int, int> pos = Utils::generateRandomPos(gridWidth, gridHeight);
+
+
+            
             int x = get<0>(pos);
             int y = get<1>(pos);
             newGrid.push_back(new Trap(x, y));
