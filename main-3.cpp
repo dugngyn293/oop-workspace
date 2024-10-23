@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
 
-#include "Cell.h"
-#include "Effect.h"
-#include "Utils.h"
-#include "Trap.h"
-#include "Character.h"
-#include "Game.h"
+#include "GridItem.hpp"
+#include "Helper.hpp"
+#include "Scienctist.hpp"
+#include "Interactable.hpp"
+#include "Goal.hpp"
+#include "Experiment.hpp"
 
 int main() {
     Cell cell1(1,3,'C');
