@@ -9,37 +9,33 @@ using namespace std;
 #include "Experiment.hpp"
 
 int main() {
-    Cell cell1(1,3,'C');
-    Cell cell2(4,7,'C');
+  
+    int gridWidth = 4;
+    int gridHeight = 3;
+
+  
+    Scientist player(gridWidth, gridHeight);
+
     
-    std::cout << "Distance between Cell 1 and Cell 2 is " << endl;
-    cout << Utils::calculateDistance(cell1.getPos(), cell2.getPos()) << endl;
+    Goal goal(gridWidth, gridHeight);
+    Experiment experiment1(1, 1, gridWidth, gridHeight);
+    Experiment experiment2(2, 2, gridWidth, gridHeight);
 
-    cout << "--------------" << endl;
+   
+    std::cout << "Moving player to (1, 1): " << (player.move(1, 1) ? "Success" : "Failed") << "\n";
 
-    Trap trap(1,4);
-    Character player(1,3);
+  
+    std::cout << "Interacting with experiment1: " << (experiment1.interact(&player) ? "Scientist exhausted" : "Experiment done") << "\n";
 
-    cout << "Trap's current state is " << trap.isActive() << endl;
-
-    cout << "Player's current type is: " << player.getType() << endl;
-    cout << "Player's current position is: " << get<0>(player.getPos()) << ", "<< get<1>(player.getPos()) << endl;
-
-    player.move(1,0);
-
-    cout << "Player's current type is: " << player.getType() << endl;
-    cout << "Player's current position is: " << get<0>(player.getPos()) << ", "<< get<1>(player.getPos()) << endl;
-
-    trap.apply(player);
-
-    cout << "Player's current type is: " << player.getType() << endl;
-    cout << "Player's current position is: " << get<0>(player.getPos()) << ", "<< get<1>(player.getPos()) << endl;
-
-    cout << "Trap's current state is " << trap.isActive() << endl;
-
-
-    cout << "--------------" << endl;
     
+    std::cout << "Moving player to (2, 2): " << (player.move(1, 1) ? "Success" : "Failed") << "\n";
+
+    
+    std::cout << "Interacting with experiment2: " << (experiment2.interact(&player) ? "Scientist exhausted" : "Experiment done") << "\n";
+
+    std::cout << "Scientist's experiment count: " << player.getExperimentCount() << "\n";
+    std::cout << "Moving player to the Goal: " << (player.move(1, 1) ? "Success" : "Failed") << "\n";
+    std::cout << "Interacting with Goal: " << (goal.interact(&player) ? "Game Won!" : "Game Lost") << "\n";
 
     Game game;
 
