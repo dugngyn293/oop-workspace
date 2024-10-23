@@ -1,16 +1,23 @@
 #include <iostream>
-using namespace std;
-
-#include "Cell.h"
-#include "Effect.h"
-#include "Utils.h"
+#include "GridItem.hpp"
+#include "Helper.hpp"
 
 int main() {
-    Cell cell1(1,3,'C');
-    Cell cell2(4,7,'C');
+  
+    GridItem item1(1, 2, 3, 4);
+    GridItem item2(5, 6, 3, 4);
+
     
-    std::cout << "Distance between Cell 1 and Cell 2 is " << endl;
-    cout << Utils::calculateDistance(cell1.getPos(), cell2.getPos()) << endl;
+    item1.setCoordinates(3, 4);
+    auto coords = item1.getCoordinates();
+    std::cout << "Item1 Coordinates: (" << coords.first << ", " << coords.second << ")\n";
+
+    
+    int distance = Helper::manhattanDistance(item1.getCoordinates(), item2.getCoordinates());
+    std::cout << "Manhattan Distance between item1 and item2: " << distance << "\n";
+
+    
+    std::cout << "Active GridItem count: " << GridItem::getActiveGridItemCount() << "\n";
 
     return 0;
 }
