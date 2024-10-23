@@ -2,6 +2,7 @@
 #define SCIENTIST_HPP
 
 #include "GridItem.hpp"
+#include <cstdlib>
 using namespace std; 
 
 class Scientist : public GridItem {
