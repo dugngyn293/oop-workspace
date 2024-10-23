@@ -2,6 +2,7 @@
 #define SCIENTIST_HPP
 
 #include "GridItem.hpp"
+using namespace std; 
 
 class Scientist : public GridItem {
 private:
@@ -18,7 +19,7 @@ public:
         experimentCount++;
     }
     bool move(int xOffset, int yOffset) {
-        if (std::abs(xOffset) <= 2 && std::abs(yOffset) <= 2) {
+        if (abs(xOffset) <= 2 && abs(yOffset) <= 2) {
             int newX = getCoordinates().first + xOffset;
             int newY = getCoordinates().second + yOffset;
             if (newX >= 0 && newX < getGridWidth() && newY >= 0 && newY < getGridHeight()) {
