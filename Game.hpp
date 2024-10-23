@@ -102,4 +102,4 @@ public:
         }
     }
 
-    void printG
+    void printG;
