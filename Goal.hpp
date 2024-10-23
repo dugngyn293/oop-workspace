@@ -25,4 +25,4 @@ public:
     }
 };
 
-#endif // GOAL_HPP
+#endif 

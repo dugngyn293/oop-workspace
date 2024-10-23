@@ -12,5 +12,5 @@ public:
     }
 };
 
-#endif // HELPER_HPP
+#endif
 
