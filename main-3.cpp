@@ -3,7 +3,7 @@ using namespace std;
 
 #include "GridItem.hpp"
 #include "Helper.hpp"
-#include "Scienctist.hpp"
+#include "Scientist.hpp"
 #include "Interactable.hpp"
 #include "Goal.hpp"
 #include "Experiment.hpp"
