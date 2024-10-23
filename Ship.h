@@ -1,18 +1,16 @@
-#ifndef SHIP_H
-#define SHIP_H
-
+#pragma once
 #include "GameEntity.h"
 
-
-class Ship: public GameEntity{
+class Ship : public GameEntity {
     public:
-        Ship(): GameEntity(){};
-        Ship(int x, int y): GameEntity(x, y, 'S'){};
-        void move(int dx, int dy){
-            std::tuple<int, int> position_ = this->getPos();
-            this->setPosition(std::get<0>(position_)+dx, std::get<1>(position_)+dy);
-        }
-        ~Ship(){};
-};
+    Ship() {
 
-#endif
+    }
+    Ship(int x, int y) {
+        position = std::make_tuple(x, y);
+        type = 'S';
+    }
+    void move(int dx, int dy) {
+        position = std::make_tuple(std::get<0>(position) + dx, std::get<1>(position) + dy);
+    }
+};

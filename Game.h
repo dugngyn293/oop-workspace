@@ -1,78 +1,73 @@
-#ifndef GAME_H
-#define GAME_H
-
-#include <vector>
+#pragma once
 #include "GameEntity.h"
+#include "Explosion.h"
 #include "Ship.h"
 #include "Mine.h"
 #include "Utils.h"
+#include <vector>
 #include <iostream>
 
-class Game{
+class Game {
     private:
-        std::vector<GameEntity*> entities;
-        std::vector<Ship> ships;
-        std::vector<Mine> mines;
+    std::vector <GameEntity*> entities;
+    int numShips;
+    int numMines;
     public:
-        Game(){
-        };
-        std::vector<GameEntity*> get_entities(){
-            return entities;
-        };
-        void set_entities(std::vector<GameEntity*> entities_){
-            entities = entities_;
-        };
-        std::vector<GameEntity*> initGame(int numShips, int numMines, int gridWidth, int gridHeight){
-            // Utils util;
-            this->ships.resize(numShips);
-            this->mines.resize(numMines);
-            this->entities.resize(numShips+numMines);
-            for(int i=0;i<numShips;i++){
-                std::tuple<int, int> pos = Utils::generateRandomPos(gridHeight, gridHeight);
-                int x = std::get<0>(pos);
-                int y = std::get<1>(pos);
-                this->ships[i] = Ship(x,y);
-                this->entities[i] = &this->ships[i];
-            }
-            for(int j=0;j<numMines;j++){
-                std::tuple<int, int> pos = Utils::generateRandomPos(gridHeight, gridHeight);
-                int x = std::get<0>(pos);
-                int y = std::get<1>(pos);
-                this->mines[j] = Mine(x,y);
-                this->entities[numShips+j] = &this->mines[j];
-            }
-            return entities;
+    Game() {
+
+    }
+    std::vector<GameEntity*> get_entities() {
+        return entities;
+    }
+
+    void set_entities(std::vector<GameEntity*> new_entites) {
+        entities = new_entites;
+    }
+    std::vector<GameEntity*> initGame(int numShips, int numMines, int gridWidth, int gridHeight) {
+        this->numShips = numShips;
+        this->numMines = numMines;
+        for (int i = 0; i < numShips; i++) {
+            entities.push_back(new Ship(std::get<0>(Utils::generateRandomPos(gridWidth, gridHeight)), std::get<1>(Utils::generateRandomPos(gridWidth, gridHeight))));
         }
-        void gameLoop(int maxIterations, double mineDistanceThreshold){
-            Utils util;
-            for(int i=0; i<maxIterations; i++){
-                for(int j=0; j<ships.size();j++){
-                    ships[j].move(1,0);
+        for (int i = 0; i < numMines; i++) {
+            entities.push_back(new Mine(std::get<0>(Utils::generateRandomPos(gridWidth, gridHeight)), std::get<1>(Utils::generateRandomPos(gridWidth, gridHeight))));
+        }
+        return entities;
+    }
+
+    void gameLoop(int maxIterations, double mineDistanceThreshold) {
+        for (int i = 0; i < maxIterations; i++) {
+            for (int j = 0; j < numShips; j++) {
+                Ship *ship = dynamic_cast<Ship *>(entities[j]);
+                if (ship != nullptr) {
+                    if (ship->getType() != 'X') {
+                        ship->move(0,1);
+                    }
+                    
                 }
-                loop:
-                    for(int j=0; j<ships.size();j++){
-                        for(int k=0;k<mines.size();k++){
-                            if(util.calculateDistance(ships[j].getPos(), mines[k].getPos()) < mineDistanceThreshold){
-                                Explosion explosion = mines[k].explode();
-                                explosion.apply(ships[j]);
-                                goto check;
-                            }
+            }
+            for (int k = numShips; k < entities.size(); k++) {
+                for (int h = 0; h < numShips; h++) {
+                    if (entities[h]->getType() != 'X' && entities[k]->getType() != 'X' && Utils::calculateDistance(entities[h]->getPos(), entities[k]->getPos()) < mineDistanceThreshold) { // distance
+                        Mine* mine = dynamic_cast<Mine *>(entities[k]);
+                        if (mine != nullptr) {
+                            Explosion new_explosion = mine->explode();
+                            new_explosion.apply(*entities[h]);
+                            numMines--;
+                            numShips--;
                         }
                     }
-                check:
-                    bool isShip = false;
-                    for(int i=0; i<entities.size(); i++){
-                        if(entities[i]->getType() == 'S'){
-                            isShip = true;
-                        }
-                    }
-                    if(!isShip){
-                        return;
-                    }
-
+                }
+            }
+            if (numShips == 0) {
+                return;
             }
         }
-
+    }
+    ~Game() {
+        for (int i = 0; i < entities.size(); i++) {
+            delete entities[i];
+        }
+        entities.clear();
+    }
 };
-
-#endif

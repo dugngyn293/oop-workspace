@@ -1,15 +1,12 @@
-#include <iostream>
-using namespace std;
-
 #include "GameEntity.h"
-#include "Effect.h"
 #include "Utils.h"
+#include "Effect.h" 
+#include <iostream>
 
-int main(){
-    GameEntity pos1(1, 2, 'C');
-    GameEntity pos2(4, 6, 'C');
-    Effect b;
-    Utils c;
+int main() {
+    GameEntity entity1(1,2, 'A');
+    GameEntity entity2(2,3, 'B');
+    std::cout << Utils::calculateDistance(entity1.getPos(), entity2.getPos()) << std::endl;
 
-    cout << c.calculateDistance(pos1.getPos(), pos2.getPos()) << endl;
+    return 0;
 }

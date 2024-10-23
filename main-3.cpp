@@ -1,15 +1,9 @@
-#include <iostream>
-using namespace std;
-
 #include "Game.h"
-#include "GameEntity.h"
-#include "Effect.h"
-#include "Explosion.h"
-#include "Ship.h"
-#include "Mine.h"
+#include <iostream>
 
-int main(){
+int main() {
     Game game;
-    std::vector<GameEntity*> entities = game.initGame(3, 4, 8, 9);
-    game.gameLoop(100, 2);
+    game.initGame(3,4,10,10);
+    game.gameLoop(8, 1);
+    return 0;
 }

@@ -1,14 +1,13 @@
 #ifndef EFFECT_H
 #define EFFECT_H
-
-#include <tuple>
 #include "GameEntity.h"
 
-class Effect{
+class Effect {
     public:
-        Effect(){};
-        virtual void apply(GameEntity& entity){};
-        ~Effect(){};
+    Effect() {
+        
+    }
+    virtual void apply(GameEntity& entity) = 0;
 };
 
 #endif
